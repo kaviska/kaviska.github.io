@@ -57,7 +57,7 @@ singleInput('Notation of insertion or substitution and District Registrar or Reg
 
 singleLine();
 
-
+createButtonGroup()
 
 
 
@@ -245,3 +245,85 @@ function singleLine(){
   line.className = 'mt-5';
   document.querySelector('.form-content').appendChild(line);
 }
+
+function createButtonGroup() {
+  // Create the div with class "flex gap-3 mt-3"
+  const buttonGroupDiv = document.createElement('div');
+  buttonGroupDiv.className = 'flex gap-3 mt-3';
+
+  // Create the Submit button
+  const submitButton = document.createElement('button');
+  submitButton.className = 'btn btn-primary mt-3 w-100';
+  submitButton.textContent = 'Submit';
+  submitButton.id = 'submit';
+
+  // Add event listener to the submit button
+  submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    printFormValues();
+  });
+
+  // Create the Reset button
+  const resetButton = document.createElement('button');
+  resetButton.className = 'btn btn-danger mt-3 w-100';
+  resetButton.textContent = 'Reset';
+  resetButton.id = 'reset';
+
+  // Add event listener to the reset button
+  resetButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    clearForm();
+  });
+
+  // Append the buttons to the div
+  buttonGroupDiv.appendChild(submitButton);
+  buttonGroupDiv.appendChild(resetButton);
+
+  // Append the div to the form content
+  document.querySelector('.form-content').appendChild(buttonGroupDiv);
+}
+
+
+function clearForm() {
+  const inputs = document.querySelectorAll('.form-content input');
+  inputs.forEach(input => {
+    if (input.type === 'radio') {
+      input.checked = false;
+    } else {
+      input.value = '';
+    }
+  });
+}
+
+function printFormValues() {
+  const inputs = document.querySelectorAll('.form-content input');
+  let printArea = document.createElement('div');
+  printArea.className = 'print-area';
+
+  inputs.forEach(input => {
+    // Only print the values of non-radio inputs or the checked radio buttons
+    if ((input.type === 'radio' && input.checked) || input.type !== 'radio') {
+      const valueP = document.createElement('p');
+      valueP.textContent = input.value;  // Only print the value, not the label
+      printArea.appendChild(valueP);
+    }
+  });
+
+  // Prepare the print window
+  const printWindow = window.open('', '', 'height=600,width=800');
+  printWindow.document.write('<html><head><title>Form Values</title>');
+  printWindow.document.write('<style>body { font-family: Arial, sans-serif; padding: 20px 0px 0px 400px; }</style>');
+  printWindow.document.write('</head><body>');
+  printWindow.document.write(printArea.innerHTML);
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  printWindow.print();
+
+  // Clear the print window and other additonal window after user close the print window
+  printWindow.onafterprint = function() {
+    printWindow.close();
+  }
+  
+}
+
+
