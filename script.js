@@ -30,34 +30,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
   //were parents married
   createRadioInput('Were your parents married?', 'married', 'Yes', 'No')
 
-   createSectionHeader('If Grandfather Born in Sri Lanka');
-   //full Name
-    singleInput('Full Name', 'Enter your grandfather\'s name', 'grandfatherName');
-    //date of birth
-    singleInput('Date of Birth', 'Enter your grandfather\'s date of birth', 'grandfatherDob', 'date');
-    //place of birth
-    singleInput('Place of Birth', 'Enter your grandfather\'s place of birth', 'grandfatherPob');
+  createSectionHeader('If Grandfather Born in Sri Lanka');
+  //full Name
+  singleInput('Full Name', 'Enter your grandfather\'s name', 'grandfatherName');
+  //date of birth
+  singleInput('Date of Birth', 'Enter your grandfather\'s date of birth', 'grandfatherDob', 'date');
+  //place of birth
+  singleInput('Place of Birth', 'Enter your grandfather\'s place of birth', 'grandfatherPob');
 
-    createSectionHeader(' lf the Father Was Not born in Sri Lanka and If the Great Grandfather was born in Sri Lanka Great Grandfather\'s Details');
-    //full Name
-    singleInput('Full Name', 'Enter your great grandfather\'s name', 'greatGrandfatherName');
-    //date of birth
-    singleInput('Date of Birth', 'Enter your great grandfather\'s date of birth', 'greatGrandfatherDob', 'date');
-    //place of birth
-    singleInput('Place of Birth', 'Enter your great grandfather\'s place of birth', 'greatGrandfatherPob');
-    
-    singleLine();
-    singleInput('Informant\'s full name, residence and in what capacity he gives information', 'informantInfo', 'informantInfo','text');
-    singleInput('Informant\'s signature', 'informantSignature', 'informantSignature','text');
-    singleInput('Date of Registration', 'Enter the date of registration', 'dateOfRegistration', 'date');
-    singleInput('Registrar\'s Signature', 'Enter the registrar\'s signature', 'registrarSignature', 'text');
-singleInput('Name Inserted or Substituted After Registration', 'Enter the name inserted or substituted after registration', 'nameInserted', 'text');
-singleInput('Name of person on whose information particular: relating to item I were supplied and in what capacity he gave information', 'Enter the name of the person on whose information particular relating to item I were supplied and in what capacity he gave information', 'nameOfPerson', 'text');
-singleInput('Notation of insertion or substitution and District Registrar or Registrar General\'s signature', 'Enter the notation of insertion or substitution and District Registrar or Registrar General\'s signature', 'notation', 'text');
+  createSectionHeader(' lf the Father Was Not born in Sri Lanka and If the Great Grandfather was born in Sri Lanka Great Grandfather\'s Details');
+  //full Name
+  singleInput('Full Name', 'Enter your great grandfather\'s name', 'greatGrandfatherName');
+  //date of birth
+  singleInput('Date of Birth', 'Enter your great grandfather\'s date of birth', 'greatGrandfatherDob', 'date');
+  //place of birth
+  singleInput('Place of Birth', 'Enter your great grandfather\'s place of birth', 'greatGrandfatherPob');
 
-singleLine();
+  singleLine();
+  singleInput('Informant\'s full name, residence and in what capacity he gives information', 'informantInfo', 'informantInfo', 'text');
+  singleInput('Informant\'s signature', 'informantSignature', 'informantSignature', 'text');
+  singleInput('Date of Registration', 'Enter the date of registration', 'dateOfRegistration', 'date');
+  singleInput('Registrar\'s Signature', 'Enter the registrar\'s signature', 'registrarSignature', 'text');
+  singleInput('Name Inserted or Substituted After Registration', 'Enter the name inserted or substituted after registration', 'nameInserted', 'text');
+  singleInput('Name of person on whose information particular: relating to item I were supplied and in what capacity he gave information', 'Enter the name of the person on whose information particular relating to item I were supplied and in what capacity he gave information', 'nameOfPerson', 'text');
+  singleInput('Notation of insertion or substitution and District Registrar or Registrar General\'s signature', 'Enter the notation of insertion or substitution and District Registrar or Registrar General\'s signature', 'notation', 'text');
 
-createButtonGroup()
+  singleLine();
+
+  createButtonGroup()
 
 
 
@@ -240,7 +240,7 @@ function createRadioInput(labelText, radioName, maleLabel, femaleLabel) {
   document.querySelector('.form-content').appendChild(rowDiv);
 }
 
-function singleLine(){
+function singleLine() {
   const line = document.createElement('hr');
   line.className = 'mt-5';
   document.querySelector('.form-content').appendChild(line);
@@ -320,10 +320,10 @@ function printFormValues() {
   printWindow.print();
 
   // Clear the print window and other additonal window after user close the print window
-  printWindow.onafterprint = function() {
+  printWindow.onafterprint = function () {
     printWindow.close();
   }
-  
+
 }
 
 
