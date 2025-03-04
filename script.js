@@ -194,7 +194,7 @@ function createRadioInput(labelText, radioName, maleLabel, femaleLabel) {
   radioInput1.type = 'radio';
   radioInput1.name = radioName;
   radioInput1.id = 'inlineRadio1';
-  radioInput1.value = 'Male';
+  radioInput1.value = maleLabel;
 
   // Create the first radio button label
   const radioLabel1 = document.createElement('label');
@@ -216,7 +216,7 @@ function createRadioInput(labelText, radioName, maleLabel, femaleLabel) {
   radioInput2.type = 'radio';
   radioInput2.name = radioName;
   radioInput2.id = 'inlineRadio2';
-  radioInput2.value = 'Female';
+  radioInput2.value = femaleLabel;
 
   // Create the second radio button label
   const radioLabel2 = document.createElement('label');
@@ -304,6 +304,7 @@ function printFormValues() {
     // Only print the values of non-radio inputs or the checked radio buttons
     if ((input.type === 'radio' && input.checked) || input.type !== 'radio') {
       const valueP = document.createElement('p');
+      valueP.style.marginTop='40px';
       valueP.textContent = input.value;  // Only print the value, not the label
       printArea.appendChild(valueP);
     }
@@ -312,7 +313,7 @@ function printFormValues() {
   // Prepare the print window
   const printWindow = window.open('', '', 'height=600,width=800');
   printWindow.document.write('<html><head><title>Form Values</title>');
-  printWindow.document.write('<style>body { font-family: Arial, sans-serif; padding: 20px 0px 0px 400px; }</style>');
+  printWindow.document.write('<style>body { font-family: Arial, sans-serif; padding: 300px 0px 0px 400px; }</style>');
   printWindow.document.write('</head><body>');
   printWindow.document.write(printArea.innerHTML);
   printWindow.document.write('</body></html>');
