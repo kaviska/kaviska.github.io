@@ -300,20 +300,81 @@ function printFormValues() {
   let printArea = document.createElement('div');
   printArea.className = 'print-area';
 
+  let dobValue = '';
+  let pobValue = '';
+
   inputs.forEach(input => {
     // Only print the values of non-radio inputs or the checked radio buttons
     if ((input.type === 'radio' && input.checked) || input.type !== 'radio') {
-      const valueP = document.createElement('p');
-      valueP.style.marginTop='40px';
-      valueP.textContent = input.value;  // Only print the value, not the label
-      printArea.appendChild(valueP);
-    }
-  });
+      if (input.id === 'dob') {
+        dobValue = input.value;
+      } else if (input.id === 'pob') {
+        pobValue = input.value;
+      } else {
+        const valueP = document.createElement('p');
+       
+     
+        if(input.id==='informantInfo'){
+          printArea.appendChild(document.createElement('br'));
+        }
+        if(input.id==='nameInserted'){
+
+          printArea.appendChild(document.createElement('br'));
+        }
+        if(input.id==='notation'){
+          printArea.appendChild(document.createElement('br'));
+        
+
+        }
+        if(input.id==='nameOfPerson'){
+          printArea.appendChild(document.createElement('br'));
+        
+
+        }
+        else{
+
+
+        }
+        valueP.style.marginTop = '49px';
+
+
+        valueP.textContent = input.value;  // Only print the value, not the label
+
+        printArea.appendChild(valueP);
+        if (input.id === 'grandfatherPob') {
+          printArea.appendChild(document.createElement('br'));
+          printArea.appendChild(document.createElement('br'));
+          printArea.appendChild(document.createElement('br'));
+        
+         
+        }
+        if(input.id==='notation'){
+          printArea.appendChild(document.createElement('br'));
+          
+
+        }
+        if(input.id==='nameOfPerson'){
+          printArea.appendChild(document.createElement('br'));
+          
+
+        }
+
+
+        }
+      }
+    });
+
+  if (dobValue || pobValue) {
+    const dobPobP = document.createElement('p');
+    dobPobP.style.marginTop = '0px';
+    dobPobP.textContent = `${dobValue} ${pobValue}`;
+    printArea.insertBefore(dobPobP, printArea.firstChild);
+  }
 
   // Prepare the print window
   const printWindow = window.open('', '', 'height=600,width=800');
   printWindow.document.write('<html><head><title>Form Values</title>');
-  printWindow.document.write('<style>body { font-family: Arial, sans-serif; padding: 300px 0px 0px 400px; }</style>');
+  printWindow.document.write('<style>body { font-family: Arial, sans-serif; padding: 260px 0px 0px 50%; }</style>');
   printWindow.document.write('</head><body>');
   printWindow.document.write(printArea.innerHTML);
   printWindow.document.write('</body></html>');
