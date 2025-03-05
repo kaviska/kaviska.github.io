@@ -260,7 +260,7 @@ function createButtonGroup() {
   // Add event listener to the submit button
   submitButton.addEventListener('click', (event) => {
     event.preventDefault();
-    printFormValues();
+    generateExcel();
   });
 
   // Create the Reset button
@@ -314,50 +314,50 @@ function printFormValues() {
         const valueP = document.createElement('p');
        
      
-        if(input.id==='informantInfo'){
-          printArea.appendChild(document.createElement('br'));
-        }
-        if(input.id==='nameInserted'){
+        // if(input.id==='informantInfo'){
+        //   printArea.appendChild(document.createElement('br'));
+        // }
+        // if(input.id==='nameInserted'){
 
-          printArea.appendChild(document.createElement('br'));
-        }
-        if(input.id==='notation'){
-          printArea.appendChild(document.createElement('br'));
+        //   printArea.appendChild(document.createElement('br'));
+        // }
+        // if(input.id==='notation'){
+        //   printArea.appendChild(document.createElement('br'));
         
 
-        }
-        if(input.id==='nameOfPerson'){
-          printArea.appendChild(document.createElement('br'));
+        // }
+        // if(input.id==='nameOfPerson'){
+        //   printArea.appendChild(document.createElement('br'));
         
 
-        }
-        else{
+        // }
+        // else{
 
 
-        }
+        // }
         valueP.style.marginTop = '49px';
 
 
         valueP.textContent = input.value;  // Only print the value, not the label
 
         printArea.appendChild(valueP);
-        if (input.id === 'grandfatherPob') {
-          printArea.appendChild(document.createElement('br'));
-          printArea.appendChild(document.createElement('br'));
-          printArea.appendChild(document.createElement('br'));
+        // if (input.id === 'grandfatherPob') {
+        //   printArea.appendChild(document.createElement('br'));
+        //   printArea.appendChild(document.createElement('br'));
+        //   printArea.appendChild(document.createElement('br'));
         
          
-        }
-        if(input.id==='notation'){
-          printArea.appendChild(document.createElement('br'));
+        // }
+        // if(input.id==='notation'){
+        //   printArea.appendChild(document.createElement('br'));
           
 
-        }
-        if(input.id==='nameOfPerson'){
-          printArea.appendChild(document.createElement('br'));
+        // }
+        // if(input.id==='nameOfPerson'){
+        //   printArea.appendChild(document.createElement('br'));
           
 
-        }
+        // }
 
 
         }
@@ -389,3 +389,36 @@ function printFormValues() {
 }
 
 
+function generateExcel() {
+  const inputs = document.querySelectorAll('.form-content input');
+  const data1 = [];
+  const data2 = [];
+
+  inputs.forEach(input => {
+    if ((input.type === 'radio' && input.checked) || input.type !== 'radio') {
+      if (input.id === 'greatGrandfatherName' || input.id === 'greatGrandfatherDob' || input.id === 'greatGrandfatherPob' || input.id === 'informantInfo' || input.id === 'informantSignature' || input.id === 'dateOfRegistration' || input.id === 'registrarSignature' || input.id === 'nameInserted' || input.id === 'nameOfPerson' || input.id === 'notation') {
+        data2.push([input.value]);
+      } else {
+        data1.push([input.value]);
+      }
+    }
+  });
+
+  const worksheet1 = XLSX.utils.aoa_to_sheet(data1);
+  const worksheet2 = XLSX.utils.aoa_to_sheet(data2);
+  worksheet1['!cols'] = [
+  
+    { wch: 60 }  // Width of the second column
+  ];
+
+  worksheet2['!cols'] = [
+  
+    { wch: 60 }  // Width of the second column
+  ];
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet1, 'Page 1');
+  XLSX.utils.book_append_sheet(workbook, worksheet2, 'Page 2');
+
+  XLSX.writeFile(workbook, 'form_values.xlsx');
+}
